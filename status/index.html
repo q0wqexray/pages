@@ -2,40 +2,26 @@
 <html lang="en">
 <head>
     <title>System Status</title>
-    <div id="head-placeholder"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../shared/styles.css">
 </head>
 <body>
-    <div id="body-start-placeholder"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="content">
+        <div class="glass-card">
     
-    <h1 class="form-title"><img src="https://ripx.ru/uploads/1psekx/6936e74a7ce92.png" alt="Logo" style="vertical-align: middle; margin-right: 15px; width: 50px;">q0wqexray</h1>
+            <h1 class="form-title"><img src="../shared/logo.webp" alt="Logo" style="vertical-align: middle; margin-right: 15px; width: 50px;">q0wqexray</h1>
+            
+            <!-- Контейнер для мониторов -->
+            <div id="monitors-container" style="width: 100%; max-width: 800px;"></div>
     
-    <!-- Контейнер для мониторов -->
-    <div id="monitors-container" style="width: 100%; max-width: 800px;"></div>
-    
-    <div id="body-end-placeholder"></div>
+        </div>
+    </div>
     
     <script>
-        // Fetch and insert shared head content
-        fetch('../shared/head.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('head-placeholder').innerHTML = data;
-            });
-        
-        // Fetch and insert shared body start content
-        fetch('../shared/body-start.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('body-start-placeholder').innerHTML = data;
-            });
-        
-        // Fetch and insert shared body end content
-        fetch('../shared/body-end.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('body-end-placeholder').innerHTML = data;
-            });
-        
         // Массив API-ключей для использования
         const apiKeys = ['m801955062-f06523a4ac30ca0d4d1ce04f', 'm801957293-ea8ef3a7185db5f5de8fe8d5'];
         
@@ -205,7 +191,7 @@
                             const totalTime = 86400;
                             uptimePercentage = ((totalTime - downtimeDuration) / totalTime) * 100;
                             
-                            // Ограничиваем значение в пределах 0-100%
+                            // Ограничиваем значение в пределах 0-10%
                             uptimePercentage = Math.max(0, Math.min(100, uptimePercentage));
                         }
                         

@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
     <title>Privacy Policy</title>
-    <div id="head-placeholder"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../shared/styles.css">
 </head>
 <body>
-    <div id="body-start-placeholder"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="content">
+        <div class="glass-card">
     
-    <h1 class="form-title"><img src="https://ripx.ru/uploads/1psekx/6936e74a7ce92.png" alt="Logo" style="vertical-align: middle; margin-right: 15px; width: 50px;">q0wqexray</h1>
+            <h1 class="form-title"><img src="../shared/logo.webp" alt="Logo" style="vertical-align: middle; margin-right: 15px; width: 50px;">q0wqexray</h1>
 
     <div class="section">
         <h2>Пользовательское соглашение</h2>
@@ -33,29 +39,7 @@
         <p>Мы применяем современные меры безопасности для защиты ваших персональных данных от несанкционированного доступа, изменения, раскрытия или уничтожения. Ваши данные хранятся на защищённых серверах с ограниченным доступом. Мы регулярно проверяем и обновляем наши системы безопасности, чтобы обеспечить максимальную защиту ваших данных.</p>
     </div>
     
-    <div id="body-end-placeholder"></div>
+    </div>
     
-    <script>
-        // Fetch and insert shared head content
-        fetch('../shared/head.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('head-placeholder').innerHTML = data;
-            });
-        
-        // Fetch and insert shared body start content
-        fetch('../shared/body-start.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('body-start-placeholder').innerHTML = data;
-            });
-        
-        // Fetch and insert shared body end content
-        fetch('../shared/body-end.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('body-end-placeholder').innerHTML = data;
-            });
-    </script>
 </body>
 </html>
