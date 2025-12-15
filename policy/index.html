@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Privacy Policy</title>
+    <div id="head-placeholder"></div>
+</head>
+<body>
+    <div id="body-start-placeholder"></div>
+    
+    <h1>Privacy Policy</h1>
+    <p>Last updated: 10/24/2024</p>
+    
+    <h2>Information We Collect</h2>
+    <p>We may collect the following types of information:</p>
+    <ul>
+        <li>Personal identification information (name, email address, phone number, etc.)</li>
+        <li>Usage data when you visit our website</li>
+        <li>Cookies and similar tracking technologies</li>
+    </ul>
+    
+    <h2>How We Use Your Information</h2>
+    <p>We may use your personal information for the following purposes:</p>
+    <ul>
+        <li>To provide and maintain our service</li>
+        <li>To notify you about changes to our service</li>
+        <li>To provide customer support</li>
+        <li>To monitor the usage of our service</li>
+        <li>To detect, prevent, and address technical issues</li>
+    </ul>
+    
+    <h2>Data Security</h2>
+    <p>We implement appropriate security measures to protect against unauthorized access, alteration, disclosure, or destruction of your personal information.</p>
+    
+    <h2>Contact Us</h2>
+    <p>If you have any questions about this Privacy Policy, please contact us at privacy@example.com</p>
+    
+    <div id="body-end-placeholder"></div>
+    
+    <script>
+        // Fetch and insert shared head content
+        fetch('../shared/head.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('head-placeholder').innerHTML = data;
+            });
+        
+        // Fetch and insert shared body start content
+        fetch('../shared/body-start.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('body-start-placeholder').innerHTML = data;
+            });
+        
+        // Fetch and insert shared body end content
+        fetch('../shared/body-end.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('body-end-placeholder').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

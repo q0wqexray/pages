@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>System Status</title>
+    <div id="head-placeholder"></div>
+</head>
+<body>
+    <div id="body-start-placeholder"></div>
+    
+    <h1>System Status</h1>
+    <p>Real-time monitoring of our services</p>
+    
+    <div id="status-container">
+        <div class="loading">Loading status...</div>
+    </div>
+    
+    <div id="body-end-placeholder"></div>
+    
+    <script>
+        // Fetch and insert shared head content
+        fetch('../shared/head.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('head-placeholder').innerHTML = data;
+            });
+        
+        // Fetch and insert shared body start content
+        fetch('../shared/body-start.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('body-start-placeholder').innerHTML = data;
+            });
+        
+        // Fetch and insert shared body end content
+        fetch('../shared/body-end.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('body-end-placeholder').innerHTML = data;
+            });
+        
+        // Configuration
+        const API_KEY = "your_uptimerobot_readonly_api_key_here";
+        const API_URL = "https://api.uptimerobot.com/v2/getMonitors";
+        
+        // Status mapping
+        const statusMap = {
+            0: { class: "status-paused", text: "Paused" },
+            1: { class: "status-not-checked", text: "Not Checked Yet" },
+            2: { class: "status-up", text: "Up" },
+            8: { class: "status-seems-down", text: "Seems Down" },
+            9: { class: "status-down", text: "Down" }
+        };
+        
+        // DOM element
+        const statusContainer = document.getElementById("status-container");
+        
+        // Fetch monitors from UptimeRobot API
+        async function fetchMonitorStatus() {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `api_key=${API_KEY}&format=json`
+                });
+                
+                const data = await response.json();
+                
+                if (data.stat !== "ok") {
+                    throw new Error(`API error: ${data.error?.message || 'Unknown error'}`);
+                }
+                
+                displayMonitors(data.monitors);
+            } catch (error) {
+                console.error("Error fetching monitor status:", error);
+                statusContainer.innerHTML = `
+                    <div class="error-message">
+                        <p>Error loading status information.</p>
+                        <p>Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Display monitors in the UI
+        function displayMonitors(monitors) {
+            if (!monitors || monitors.length === 0) {
+                statusContainer.innerHTML = '<p>No monitors configured.</p>';
+                return;
+            }
+            
+            let monitorsHtml = '';
+            
+            monitors.forEach(monitor => {
+                const statusInfo = statusMap[monitor.status] || { class: "status-unknown", text: "Unknown" };
+                
+                monitorsHtml += `
+                    <div class="monitor">
+                        <span>${monitor.friendly_name}</span>
+                        <span>
+                            <span class="status-indicator ${statusInfo.class}" title="${statusInfo.text}"></span>
+                            ${statusInfo.text}
+                        </span>
+                    </div>
+                `;
+            });
+            
+            statusContainer.innerHTML = monitorsHtml;
+        }
+        
+        // Initialize
+        fetchMonitorStatus();
+    </script>
+</body>
+</html>
